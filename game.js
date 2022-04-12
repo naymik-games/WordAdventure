@@ -13,7 +13,7 @@ window.onload = function () {
       height: 1640
     },
 
-    scene: [preloadGame, startGame, playGame]
+    scene: [preloadGame, startGame, selectGame, playGame]
   }
   game = new Phaser.Game(gameConfig);
   window.focus();
@@ -35,14 +35,17 @@ class playGame extends Phaser.Scene {
     if (gameMode == 0) { //classic
       gameOptions.rows = 8
       gameOptions.cols = 6
+      this.initialTime = 90;
       this.replace = false;
     } else if (gameMode == 1) { //search
       gameOptions.rows = levels[onLevel].size.rows //13
       gameOptions.cols = levels[onLevel].size.cols //10
+      this.initialTime = 120;
       this.replace = false;
     } else { //adventure
       gameOptions.cols = Phaser.Math.Between(5, 9)
       gameOptions.rows = Phaser.Math.Between(5, 9)
+      this.initialTime = 90;
       this.replace = true;
     }
     this.dragging = false;
@@ -84,7 +87,7 @@ class playGame extends Phaser.Scene {
     //this.check = this.add.image(725, 1000, 'check').setScale(.7);
     this.makeMenu()
     //timer stuff
-    this.initialTime = 5;
+
     this.timerText = this.add.bitmapText(gameOptions.offsetX, 1585, 'lato', this.formatTime(this.initialTime), 100).setOrigin(0, .5).setTint(0xff8045).setAlpha(1);
     //text = this.add.text(32, 32, 'Countdown: ' + formatTime(this.initialTime));
     // Each 1000 ms call onEvent
@@ -127,7 +130,8 @@ class playGame extends Phaser.Scene {
     this.timerText.setText(this.formatTime(this.initialTime));
     if (this.initialTime == 0) {
       this.timedEvent.paused = true;
-      alert('game over')
+      //alert('game over')
+      this.scene.start('startGame')
     }
   }
   incrementScore() {

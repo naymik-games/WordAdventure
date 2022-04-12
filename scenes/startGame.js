@@ -34,7 +34,7 @@ class startGame extends Phaser.Scene {
     var search = this.add.bitmapText(game.config.width / 2 - 50, 875, 'lato', 'Search', 80).setOrigin(0, .5).setTint(0xfafafa).setInteractive();
     search.on('pointerdown', function () {
       gameMode = 1
-      this.scene.start('playGame');
+      this.scene.start('selectGame');
     }, this);
 
   }
