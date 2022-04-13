@@ -13,7 +13,7 @@ window.onload = function () {
       height: 1640
     },
 
-    scene: [preloadGame, startGame, selectGame, playGame]
+    scene: [preloadGame, startGame, selectGame, playGame, endGame]
   }
   game = new Phaser.Game(gameConfig);
   window.focus();
@@ -63,6 +63,7 @@ class playGame extends Phaser.Scene {
     this.foundWords = []
     this.totalScore = 0;
     this.scoreBuffer = 0
+    this.tempCoinCount = gameSettings.coins
 
     this.blockSize = (game.config.width - (gameOptions.offsetX * 2)) / gameOptions.cols;
     this.createBoard()
@@ -95,6 +96,10 @@ class playGame extends Phaser.Scene {
     //help icons
     this.timerIcon = this.add.image(675, 1585, 'timer').setInteractive()
     this.timerIcon.on('pointerdown', this.buyTime, this)
+    //coin display
+    this.coinIcon = this.add.image(game.config.width - gameOptions.offsetX, 1385, 'coin').setOrigin(1, .5).setScale(1.5);
+    this.coinText = this.add.bitmapText(game.config.width - (gameOptions.offsetX + 60), 1385, 'lato', gameSettings.coins, 65).setOrigin(.5).setTint(0xf5f5f5).setAlpha(1);
+
     //search stuff
     if (gameMode == 1) {
       this.hintIcon = this.add.image(825, 1585, 'view').setInteractive()
@@ -131,7 +136,13 @@ class playGame extends Phaser.Scene {
     if (this.initialTime == 0) {
       this.timedEvent.paused = true;
       //alert('game over')
-      this.scene.start('startGame')
+      gameSettings.coins = this.tempCoinCount;
+      this.saveSettings()
+      var data = {
+        score: this.totalScore,
+        outcome: 'win'
+      }
+      this.scene.start('endGame', data)
     }
   }
   incrementScore() {
@@ -139,14 +150,20 @@ class playGame extends Phaser.Scene {
     this.totalScoreText.setText(this.totalScore);
   }
   buyTime() {
-    var tween = this.tweens.add({
-      targets: this.timerIcon,
-      scale: .1,
-      yoyo: true,
-      duration: 125
-    })
-    this.initialTime += 25
+    if (this.tempCoinCount >= 10) {
+      var tween = this.tweens.add({
+        targets: this.timerIcon,
+        scale: .1,
+        yoyo: true,
+        duration: 125
+      })
+      this.initialTime += 25;
+      this.subtractCoins(10)
+
+    }
+
   }
+
   doHintWord() {
     if (gameMode != 1) {
       return
@@ -175,8 +192,38 @@ class playGame extends Phaser.Scene {
 
     //}
   }
+  subtractCoins(count) {
+    this.tempCoinCount -= 10;
+    var tween = this.tweens.add({
+      targets: this.coinText,
+      scale: .1,
+      yoyo: true,
+      duration: 200,
+      onYoyoScope: this,
+      onYoyo: function () {
+        this.coinText.setText(this.tempCoinCount)
+      }
+    })
+    gameSettings.coins = this.tempCoinCount
+    this.saveSettings()
+  }
+  addCoinCount(count) {
+    this.tempCoinCount += count;
+    var tween = this.tweens.add({
+      targets: this.coinText,
+      scale: .1,
+      yoyo: true,
+      duration: 200,
+      onYoyoScope: this,
+      onYoyo: function () {
+        this.coinText.setText(this.tempCoinCount)
+      }
+    })
+
+  }
   tileStart(e) {
     this.selected = [];
+    this.coins = []
     this.guessWord = '';
     this.wordValue = 0;
     this.wordValueFinal = 0;
@@ -190,6 +237,9 @@ class playGame extends Phaser.Scene {
       this.guessWord += this.board[row][col].letter
       if (this.board[row][col].bonus > this.currentBonus) {
         this.currentBonus = this.board[row][col].bonus
+      }
+      if (this.board[row][col].coin) {
+        this.coins.push({ row: row, col: col })
       }
       this.wordValue += this.board[row][col].value
       this.guessWordText.setText(this.guessWord.toUpperCase())
@@ -218,6 +268,9 @@ class playGame extends Phaser.Scene {
             this.guessWord += this.board[row][col].letter
             if (this.board[row][col].bonus > this.currentBonus) {
               this.currentBonus = this.board[row][col].bonus
+            }
+            if (this.board[row][col].coin) {
+              this.coins.push({ row: row, col: col })
             }
             this.wordValue += this.board[row][col].value
             //console.log(this.guessWord.length)
@@ -255,7 +308,8 @@ class playGame extends Phaser.Scene {
       if (wordType == 0) { //too short
         this.wordValueText.setText('0')
         this.guessWordText.setText('')
-      } else if (wordType == 1 || wordType == 4) { //found puzzle
+      } else if (wordType == 1 || wordType == 4) { //found puzzle or new word
+        this.collectCoins()
         var six = (this.base == 20) ? ' + 6 bonus' : ''
         var text = this.currentBonus + 'x' + six
         this.statusText.setText(text)
@@ -418,6 +472,29 @@ class playGame extends Phaser.Scene {
       duration: 250
     })
   }
+  collectCoins() {
+    if (this.coins.length == 0) { return }
+    for (let i = 0; i < this.coins.length; i++) {
+      const coin = this.coins[i];
+      if (this.boardPU[coin.row][coin.col] != null) {
+        this.addCoinCount(1)
+        var tween = this.tweens.add({
+          targets: this.boardPU[coin.row][coin.col],
+          scale: 0,
+          angle: 360,
+          x: this.coinText.x,
+          y: this.coinText.y,
+          duration: 350,
+          onCompleteScope: this,
+          onComplete: function () {
+            this.boardPU[coin.row][coin.col].destroy()
+            this.boardPU[coin.row][coin.col] = null;
+          }
+        })
+      }
+
+    }
+  }
   addDoubles(count) {
     var i = 0
     while (i < count) {
@@ -454,6 +531,21 @@ class playGame extends Phaser.Scene {
       }
     }
   }
+  addCoins(count) {
+    var i = 0
+    while (i < count) {
+      var row = Phaser.Math.Between(0, gameOptions.rows - 1)
+      var col = Phaser.Math.Between(0, gameOptions.cols - 1)
+      if (!this.board[row][col].coin) {
+        this.board[row][col].coin = true;
+        var block = this.add.image(gameOptions.offsetX + (this.blockSize * col) + this.blockSize / 2, gameOptions.offsetY + this.blockSize / 2 + (this.blockSize * row), 'coin').setAlpha(1);
+        block.displayWidth = this.blockSize;
+        block.displayHeight = this.blockSize;
+        this.boardPU[row][col] = block
+        i++
+      }
+    }
+  }
   createBoard() {
     let orientationTypes = [['horizontal', 'vertical', 'diagonal'], ['horizontal', 'vertical', 'diagonal'], ['horizontal', 'horizontalBack', 'vertical', 'verticalUp', 'diagonal'], ['horizontal', 'horizontalBack', 'vertical', 'verticalUp', 'diagonal', 'diagonalUp', 'diagonalBack', 'diagonalUpBack']]
     puzzle = wordfind.newPuzzle(levels[onLevel].words, {
@@ -464,8 +556,10 @@ class playGame extends Phaser.Scene {
       preferOverlap: levels[onLevel].overlap
     });
     this.board = [];
+    this.boardPU = []
     for (var i = 0; i < gameOptions.rows; i++) {
       var col = [];
+      var colPU = []
       for (var j = 0; j < gameOptions.cols; j++) {
         var wLetter = this.makeLetter(i, j)
         var letterPosition = tileLetters.indexOf(wLetter);
@@ -478,6 +572,7 @@ class playGame extends Phaser.Scene {
           value: tileLettersValues[letterPosition],
           trap: false,
           image: block,
+          coin: false,
           bonus: 1
         }
         var tween = this.tweens.add({
@@ -488,12 +583,16 @@ class playGame extends Phaser.Scene {
         })
         // block.value = 50
         col.push(tile);
+        colPU.push(null)
       }
       this.board.push(col);
+      this.boardPU.push(colPU)
     }
     this.addDoubles(3)
     this.addTripples(2)
+    this.addCoins(4)
     //this.addTraps(2)
+    console.log(this.boardPU)
   }
   makeLetter(row, col) {
     if (gameMode == 1) {
@@ -650,5 +749,8 @@ class playGame extends Phaser.Scene {
       }
     });
 
+  }
+  saveSettings() {
+    localStorage.setItem('waSave', JSON.stringify(gameSettings))
   }
 }

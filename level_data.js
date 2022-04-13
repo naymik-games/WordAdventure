@@ -10,13 +10,13 @@ groups = [
 // 7x9
 // 10x13
 levels = [
-  { level: 0, theme: 'Something White', orient: 2, size: { cols: 7, rows: 9 }, overlap: true, words: ["frodo", "cloud", "ivory", "snow", "tooth", "vanilla"] },
+  { level: 0, theme: 'Something White', orient: 2, size: { cols: 7, rows: 9 }, overlap: true, words: ["cloud", "ivory", "snow", "tooth", "vanilla"] },
   { level: 1, theme: 'Something Red', orient: 1, size: { cols: 7, rows: 9 }, overlap: false, words: ["nose", "apple", "devil", "lips", "rover", "scare", "brick"] },
   { level: 2, theme: 'Something Black', orient: 1, size: { cols: 7, rows: 9 }, overlap: true, words: ["coal", "night", "tuxedo", "spider"] },
   { level: 3, theme: 'Something Green', orient: 0, size: { cols: 7, rows: 9 }, overlap: true, words: ["leaves", "eyes", "alligator", "envy", "light"] },
   { level: 4, theme: 'Multi-Colored', orient: 1, size: { cols: 7, rows: 9 }, overlap: false, words: ["rainbow", "people", "flowers", "prism"] },
   { level: 5, theme: 'In The Forest', orient: 0, size: { cols: 7, rows: 9 }, overlap: false, words: ["ferns", "canopy", "redwood", "owls", "trails"] },
-  { level: 6, theme: 'Green Problems', orient: 0,size: { cols: 7, rows: 9 },  overlap: true, words: ["pollution", "extinct", "warming", "plastics"] },
+  { level: 6, theme: 'Green Problems', orient: 0, size: { cols: 7, rows: 9 }, overlap: true, words: ["pollution", "extinct", "warming", "plastics"] },
   { level: 7, theme: 'Things To Do', orient: 0, size: { cols: 7, rows: 9 }, overlap: false, words: ["camping", "climb", "cycle", "hike", "run", "sail"] },
   { level: 8, theme: 'Green Solutions', size: { cols: 7, rows: 9 }, orient: 1, overlap: false, words: ["organic", "recycle", "reduce", "renewable", "reuse"] },
   { level: 9, theme: 'In the Water', orient: 1, size: { cols: 7, rows: 9 }, overlap: false, words: ["boats", "fish", "rocks", "seaweed", "trash", "whales"] },

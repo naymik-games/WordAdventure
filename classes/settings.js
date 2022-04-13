@@ -19,12 +19,13 @@ var win = false;
 var puzzle;
 let gameSettings;
 var defaultValues = {
-  mostDotsMoves: 0,
-  mostDotsTime: 0,
-  levelStatus: [0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-  totalSquares: 0,
-  group: 0,
-  currentLevel: 0
+  classicHigh: 0,
+  searchHigh: 0,
+  adventureHight: 0,
+  coins: 0,
+  onGroup: 0,
+  onLevel: 0,
+  highestSolved: 0
 }
 let tileLettersValues = [1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10, 1, 1, 1, 1];
 
