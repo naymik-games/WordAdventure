@@ -1,4 +1,4 @@
-var cacheName = 'phaser-v1';
+var cacheName = 'phaser-v1.1';
 var filesToCache = [
   '/',
   '/index.html',

@@ -21,7 +21,7 @@ let gameSettings;
 var defaultValues = {
   classicHigh: 0,
   searchHigh: 0,
-  adventureHight: 0,
+  adventureHigh: 0,
   coins: 0,
   onGroup: 0,
   onLevel: 0,

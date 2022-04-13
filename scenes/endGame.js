@@ -32,15 +32,15 @@ class endGame extends Phaser.Scene {
 
 		if (gameMode == 0) { //classic
 			if (gameSettings.classicHigh < this.score) {
-				gameSettings.classicHigh = this.scroe
+				gameSettings.classicHigh = this.score
 			}
 		} else if (gameMode == 1) { //search
 			if (gameSettings.searchHigh < this.score) {
-				gameSettings.searchHigh = this.scroe
+				gameSettings.searchHigh = this.score
 			}
 		} else { //adventure
 			if (gameSettings.adventureHigh < this.score) {
-				gameSettings.adventureHigh = this.scroe
+				gameSettings.adventureHigh = this.score
 			}
 		}
 		this.saveSettings()
