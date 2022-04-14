@@ -1,4 +1,4 @@
-var cacheName = 'WordAdventure-v1.5';
+var cacheName = 'WordAdventure-v1.6';
 var filesToCache = [
   '/',
   '/index.html',
@@ -36,7 +36,7 @@ var filesToCache = [
 
 
 
-  '/assets/fonts/lato.png',
+  '/assets/fonts/lato_0.png',
   '/assets/fonts/lato.xml',
 
 
