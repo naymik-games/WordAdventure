@@ -31,7 +31,7 @@ var filesToCache = [
   '/assets/sprites/play.png',
   '/assets/sprites/timer.png',
   '/assets/sprites/view.png',
-  '/assets/sprites/lockpng',
+  '/assets/sprites/lock.png',
 
 
 
