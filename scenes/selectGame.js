@@ -8,6 +8,7 @@ class selectGame extends Phaser.Scene {
   }
   create() {
     this.cameras.main.setBackgroundColor(0x000000);
+    var back = this.add.image(0, 0, 'back').setOrigin(0).setAlpha(1)
     this.startGroup = onGroup;
 
     /*  this.playText.on('pointerdown', function(){
@@ -16,7 +17,7 @@ class selectGame extends Phaser.Scene {
     this.swipe = false;
 
     this.showGroup(this.startGroup, 'left');
-    //this.return = this.add.image(game.config.width / 2, 1550,'menu_icons', 5).setScale(1.5).setInteractive().setTint(0xc76210);
+    //this.return = this.add.image(game.config.width / 2, 1550, 'icons', 5).setScale(1.5).setInteractive().setTint(0xc76210);
 
     //this.backText = this.add.bitmapText(game.config.width / 2, 1500, 'atari', '< back', 60).setOrigin(.5, .5).setTint(0xd8a603).setInteractive();
     //this.return.level = -2;
@@ -78,6 +79,7 @@ class selectGame extends Phaser.Scene {
       var levelBack = this.add.image(game.config.width / 2, 300 + i * 250, 'blank')
       levelBack.displayWidth = 800
       levelBack.displayHeight = 100
+      groupBox.add(levelBack);
       var levelTitle = this.add.bitmapText(150, 300 + i * 250, 'lato', (tempLevel + 1) + ' - ' + levels[tempLevel].theme, 70).setTint(0x000000).setOrigin(0, .5).setInteractive();
       if (levels[tempLevel].key in gameSettings.results) {
 
@@ -96,14 +98,16 @@ class selectGame extends Phaser.Scene {
 
       } else {
         var status = this.add.bitmapText(game.config.width / 2, levelTitle.y + 100, 'lato', 'Locked', 70).setTint(0xffffff).setOrigin(.5).setInteractive();
-        var lock = this.add.image(levelTitle.x - 25, levelTitle.y, 'lock').setScale(5).setDepth(3)
+        var lock = this.add.image(levelTitle.x - 45, levelTitle.y, 'lock').setScale(1.5).setDepth(5).setAlpha(1)
         groupBox.add(lock)
+        groupBox.bringToTop(lock)
       }
       levelTitle.on('pointerup', this.selectLevel.bind(this, levelTitle));
       levelTitle.level = tempLevel
-      groupBox.add(levelBack);
+
       groupBox.add(levelTitle);
       groupBox.add(status)
+
     }
     this.saveSettings()
 
