@@ -22,7 +22,7 @@ class startGame extends Phaser.Scene {
 
     var classicIcon = this.add.image(game.config.width / 2 - 150, 475, 'play').setTint(0xfa983c).setScale(2).setInteractive()
     var classic = this.add.bitmapText(game.config.width / 2 - 40, 475, 'lato', 'Classic', 80).setOrigin(0, .5).setTint(0xfafafa).setInteractive();
-    var classicBest = this.add.bitmapText(game.config.width / 2 - 40, 550, 'lato', 'Best: ' + gameSettings.classicHigh, 60).setOrigin(0, .5).setTint(0xfafafa).setInteractive();
+    var classicBest = this.add.bitmapText(game.config.width / 2 - 40, 550, 'lato', 'Best: ' + gameSettings.classicHigh.toLocaleString(), 60).setOrigin(0, .5).setTint(0xfafafa).setInteractive();
 
     classicIcon.on('pointerdown', function () {
       gameMode = 0
@@ -31,7 +31,7 @@ class startGame extends Phaser.Scene {
 
     var adventureIcon = this.add.image(game.config.width / 2 - 150, 775, 'play').setTint(0xfa983c).setScale(2).setInteractive()
     var adventure = this.add.bitmapText(game.config.width / 2 - 40, 775, 'lato', 'Adventure', 80).setOrigin(0, .5).setTint(0xfafafa);
-    var adventureBest = this.add.bitmapText(game.config.width / 2 - 40, 850, 'lato', 'Best: ' + gameSettings.adventureHigh, 60).setOrigin(0, .5).setTint(0xfafafa).setInteractive();
+    var adventureBest = this.add.bitmapText(game.config.width / 2 - 40, 850, 'lato', 'Best: ' + gameSettings.adventureHigh.toLocaleString(), 60).setOrigin(0, .5).setTint(0xfafafa).setInteractive();
 
     adventureIcon.on('pointerdown', function () {
       gameMode = 2
@@ -40,7 +40,7 @@ class startGame extends Phaser.Scene {
 
     var searchIcon = this.add.image(game.config.width / 2 - 150, 1075, 'play').setTint(0xfa983c).setScale(2).setInteractive()
     var search = this.add.bitmapText(game.config.width / 2 - 40, 1075, 'lato', 'Search', 80).setOrigin(0, .5).setTint(0xfafafa);
-    var searchBest = this.add.bitmapText(game.config.width / 2 - 40, 1150, 'lato', 'Best: ' + gameSettings.searchHigh, 60).setOrigin(0, .5).setTint(0xfafafa).setInteractive();
+    var searchBest = this.add.bitmapText(game.config.width / 2 - 40, 1150, 'lato', 'Best: ' + gameSettings.searchHigh.toLocaleString(), 60).setOrigin(0, .5).setTint(0xfafafa).setInteractive();
 
     searchIcon.on('pointerdown', function () {
       gameMode = 1

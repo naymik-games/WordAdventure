@@ -484,7 +484,7 @@ class playGame extends Phaser.Scene {
           angle: 360,
           x: this.coinText.x,
           y: this.coinText.y,
-          duration: 350,
+          duration: 650,
           onCompleteScope: this,
           onComplete: function () {
             this.boardPU[coin.row][coin.col].destroy()
