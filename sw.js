@@ -1,4 +1,4 @@
-var cacheName = 'WordAdventure-v1.2';
+var cacheName = 'WordAdventure-v1.3';
 var filesToCache = [
   '/',
   '/index.html',
@@ -31,6 +31,7 @@ var filesToCache = [
   '/assets/sprites/play.png',
   '/assets/sprites/timer.png',
   '/assets/sprites/view.png',
+  '/assets/sprites/lockpng',
 
 
 

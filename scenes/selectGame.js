@@ -68,83 +68,45 @@ class selectGame extends Phaser.Scene {
     }
     var groupBox = this.add.container().setDepth(2);
     var tempGroup = groupNum + 1;
-    var groupTitle = this.add.bitmapText(game.config.width / 2, 200, 'lato', groups[groupNum].title, 100).setTint(0xff8045).setOrigin(.5).setMaxWidth(500);
+    var groupTitle = this.add.bitmapText(game.config.width / 2, 150, 'lato', groups[groupNum].title, 100).setTint(0xff8045).setOrigin(.5).setMaxWidth(500);
     groupBox.add(groupTitle);
-    var groupText = this.add.bitmapText(game.config.width / 2, 1400, 'lato', tempGroup + '/' + groups.length, 60).setTint(0xff8045).setOrigin(.5).setMaxWidth(500);
+    var groupText = this.add.bitmapText(game.config.width / 2, 1550, 'lato', tempGroup + '/' + groups.length, 60).setTint(0xff8045).setOrigin(.5).setMaxWidth(500);
     groupBox.add(groupText);
-
+    //console.log(gameSettings.highestSolved)
     for (var i = 0; i < groups[groupNum].puzzleCount; i++) {
       var tempLevel = groups[groupNum].levelStart + i
-      var levelBack = this.add.image(game.config.width / 2, 400 + i * 150, 'blank')
+      var levelBack = this.add.image(game.config.width / 2, 300 + i * 250, 'blank')
       levelBack.displayWidth = 800
-      levelBack.displayHeight = 75
-      var levelTitle = this.add.bitmapText(game.config.width / 2, 400 + i * 150, 'lato', (tempLevel + 1) + ' - ' + levels[tempLevel].theme, 70).setTint(0x000000).setOrigin(.5).setInteractive();
+      levelBack.displayHeight = 100
+      var levelTitle = this.add.bitmapText(150, 300 + i * 250, 'lato', (tempLevel + 1) + ' - ' + levels[tempLevel].theme, 70).setTint(0x000000).setOrigin(0, .5).setInteractive();
+      if (levels[tempLevel].key in gameSettings.results) {
+
+      } else {
+        gameSettings.results[levels[tempLevel].key] = { best: 0, stars: 0 }
+      }
+      console.log(gameSettings.results[levels[onLevel].key].best)
+      if (levels[tempLevel].level < gameSettings.highestSolved) {
+        var status = this.add.bitmapText(game.config.width / 2, levelTitle.y + 100, 'lato', gameSettings.results[levels[tempLevel].key].stars, 70).setTint(0xffffff).setOrigin(.5).setInteractive();
+
+      } else if (levels[tempLevel].level == gameSettings.highestSolved) {
+        var status = this.add.bitmapText(game.config.width / 2, levelTitle.y + 100, 'lato', gameSettings.results[levels[tempLevel].key].stars, 70).setTint(0xffffff).setOrigin(.5).setInteractive();
+
+      } else if (levels[tempLevel].level == gameSettings.highestSolved + 1) {
+        var status = this.add.bitmapText(game.config.width / 2, levelTitle.y + 100, 'lato', 'Not Solved', 70).setTint(0xffffff).setOrigin(.5).setInteractive();
+
+      } else {
+        var status = this.add.bitmapText(game.config.width / 2, levelTitle.y + 100, 'lato', 'Locked', 70).setTint(0xffffff).setOrigin(.5).setInteractive();
+        var lock = this.add.image(levelTitle.x - 25, levelTitle.y, 'lock').setScale(5).setDepth(3)
+        groupBox.add(lock)
+      }
       levelTitle.on('pointerup', this.selectLevel.bind(this, levelTitle));
       levelTitle.level = tempLevel
       groupBox.add(levelBack);
       groupBox.add(levelTitle);
+      groupBox.add(status)
     }
-    //label.on('pointerdown', this.changeTile.bind(this, label));
+    this.saveSettings()
 
-    //	var levelNum = groupNum + (groups[groupNum].puzzleCount -1);
-    /*
-        var levelNum = groups[groupNum].startNum;
-    
-    
-        for (var i = 0; i < groups[groupNum].numLevels; i++) {
-          if(i < 3){
-         var xpos = 50 + i * 275;
-         var ypos = 400; 
-        } else if(i < 6){
-         var xpos = 50 + (i - 3) * 275;
-         var ypos = 400 + 275; 
-        } else if(i < 9){
-         var xpos = 50 + (i - 6) * 275;
-         var ypos = 400 + 550; 
-        } else {
-         var xpos = 50 + (i - 9) * 275;
-         var ypos = 400 + 825; 
-        }
-           
-          var tempLevel = levelNum + 1;
-          var statusText = this.add.bitmapText(xpos + 112.5, ypos - 60, 'atari', tempLevel, 70).setOrigin(.5).setTint(0x298191);
-        var levelTitle = this.add.image(xpos,ypos, 'select_icons', 0).setOrigin(0,.5).setScale(.75);
-        levelTitle.level = levelNum;
-    
-    
-    
-          if (gameSettings.levelStatus[levelNum] < 0) {
-            //levelTitle.setAlpha(.5)
-          levelTitle.setFrame(4);
-            
-          } else {
-            levelTitle.setInteractive();
-            if (gameSettings.levelStatus[levelNum] == 0) {
-              
-            } else if (gameSettings.levelStatus[levelNum] == '*') {
-              levelTitle.setFrame(1);
-            } else if (gameSettings.levelStatus[levelNum] == '**') {
-              levelTitle.setFrame(2);
-    
-            } else if (gameSettings.levelStatus[levelNum] == '***') {
-              levelTitle.setFrame(3);
-    
-            }
-    
-          }
-    
-    
-    
-          levelNum++;
-          groupBox.add(levelTitle);
-          groupBox.add(statusText);
-        }
-    
-    
-    
-    
-        groupBox.add(groupText);
-    */
     if (dir == 'left') {
       var xstart = 850
     } else {
@@ -212,6 +174,8 @@ class selectGame extends Phaser.Scene {
     this.scene.start('playGame')
   }
 
-
+  saveSettings() {
+    localStorage.setItem('waSave', JSON.stringify(gameSettings))
+  }
 
 }

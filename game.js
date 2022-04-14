@@ -64,6 +64,7 @@ class playGame extends Phaser.Scene {
     this.totalScore = 0;
     this.scoreBuffer = 0
     this.tempCoinCount = gameSettings.coins
+    this.puzzleCompleted = false
 
     this.blockSize = (game.config.width - (gameOptions.offsetX * 2)) / gameOptions.cols;
     this.createBoard()
@@ -140,7 +141,12 @@ class playGame extends Phaser.Scene {
       this.saveSettings()
       var data = {
         score: this.totalScore,
-        outcome: 'win'
+        outcome: 'lose'
+      }
+      if (gameMode == 1) {
+        if (this.puzzleCompleted) {
+          data.outcome = 'win'
+        }
       }
       this.scene.start('endGame', data)
     }
@@ -336,6 +342,7 @@ class playGame extends Phaser.Scene {
           })
 
           if (this.puzzleCount - this.puzzleProgress == 0) {
+            this.puzzleCompleted = true
             this.showToast('Puzzle Completed')
             var tween = this.tweens.add({
               targets: this.clueText,

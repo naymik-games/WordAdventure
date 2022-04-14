@@ -25,7 +25,8 @@ var defaultValues = {
   coins: 0,
   onGroup: 0,
   onLevel: 0,
-  highestSolved: 0
+  highestSolved: 0,
+  results: { white: { best: 0, stars: 0 } }
 }
 let tileLettersValues = [1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10, 1, 1, 1, 1];
 

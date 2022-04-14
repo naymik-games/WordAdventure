@@ -30,7 +30,39 @@ class endGame extends Phaser.Scene {
 
 		var title = this.add.bitmapText(150, 100, 'lato', 'GAME OVER', 100).setOrigin(0, .5).setTint(0xfa983c);
 		var title2 = this.add.bitmapText(150, 175, 'lato', mode, 80).setOrigin(0, .5).setTint(0xFFFFFF);
+		if (gameMode == 1) {
+			if (this.outcome == 'win') {
+				if (onLevel > gameSettings.highestSolved) {
+					gameSettings.highestSolved = onLevel
+				}
+				if (this.score > gameSettings.results[levels[onLevel].key].best) {
+					gameSettings.results[levels[onLevel].key].best = this.score
+				}
+				var outcome = this.add.bitmapText(450, 375, 'lato', 'Puzzle Solved!', 120).setOrigin(.5).setTint(0xFFFFFF);
+				if (this.score < 2000) {
+					var stars = '*'
+					gameSettings.results[levels[onLevel].key].stars = 1
+				} else if (this.score < 4000) {
+					var stars = '* *'
+					gameSettings.results[levels[onLevel].key].stars = 2
+				} else {
+					var stars = '* * *'
+					gameSettings.results[levels[onLevel].key].stars = 3
+				}
+				var starText = this.add.bitmapText(1150, 525, 'lato', stars, 200).setOrigin(.5).setTint(0xfa983c);
+				var tween = this.tweens.add({
+					targets: starText,
+					x: 450,
+					duration: 300,
+					delay: 2500,
+					ease: 'Bounce'
+				})
 
+			} else {
+				var outcome = this.add.bitmapText(450, 375, 'lato', 'Keep Trying', 120).setOrigin(.5).setTint(0xFFFFFF);
+
+			}
+		}
 		this.scoreText = this.add.bitmapText(1450, 675, 'lato', this.score.toLocaleString(), 160).setOrigin(.5).setTint(0xFFFFFF);
 		var tween = this.tweens.add({
 			targets: this.scoreText,
