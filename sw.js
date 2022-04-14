@@ -1,4 +1,4 @@
-var cacheName = 'WordAdventure-v1.3';
+var cacheName = 'WordAdventure-v1.4';
 var filesToCache = [
   '/',
   '/index.html',
