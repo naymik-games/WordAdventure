@@ -321,6 +321,10 @@ class playGame extends Phaser.Scene {
       if (wordType == 0) { //too short
         this.wordValueText.setText('0')
         this.guessWordText.setText('')
+        if(gameMode == 2){
+          //console.log(this.selected)
+          //this.swapTiles(this.selected)
+        }
       } else if (wordType == 1 || wordType == 4) { //found puzzle or new word
         this.collectCoins()
         this.collectTraps()
@@ -498,6 +502,24 @@ class playGame extends Phaser.Scene {
       displayHeight: this.blockSize,
       displayWidth: this.blockSize,
       duration: 250
+    })
+  }
+  swapTiles(tiles){
+    var row1 = tiles[0].row
+    var col1 = tiles[0].col
+    var row2 = tiles[1].row
+    var col2 = tiles[1].col
+    var tween1 = this.tweens.add({
+      targets: this.board[row1][col1].image,
+      x: this.board[row2][col2].image.x,
+      y: this.board[row2][col2].image.y,
+      duration: 200,
+    })
+    var tween2 = this.tweens.add({
+      targets: this.board[row2][col2].image,
+      x: this.board[row1][col1].image.x,
+      y: this.board[row1][col1].image.y,
+      duration: 200,
     })
   }
   collectCoins() {
