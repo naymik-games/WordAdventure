@@ -65,12 +65,12 @@ class preloadGame extends Phaser.Scene {
       assetText.destroy();
     });
 
-    this.load.image("particle", "assets/sprites/particle.png");
+
     for (var i = 0; i < 125; i++) {
       this.load.image("particle", "assets/sprites/particle.png");
     }
 
-
+    this.load.image("particle", "assets/sprites/particle.png");
 
 
     //this.load.image("particle", "assets/sprites/particle.png");

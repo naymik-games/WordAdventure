@@ -649,7 +649,7 @@ class playGame extends Phaser.Scene {
       this.addTraps(2)
     }
     //
-    console.log(this.boardPU)
+    //console.log(this.boardPU)
   }
   makeLetter(row, col) {
     if (gameMode == 1) {
