@@ -256,8 +256,8 @@ class playGame extends Phaser.Scene {
       this.wordValueText.setText((this.wordValue * this.currentBonus) * this.base)
       this.addSelectedTile(row, col, this.board[row][col].value)
       this.board[row][col].image.setAlpha(1)
-      this.board[row][col].image.displayWidth = this.blockSize - 15;
-      this.board[row][col].image.displayHeight = this.blockSize - 15;
+      this.board[row][col].image.displayWidth = this.blockSize - 25;
+      this.board[row][col].image.displayHeight = this.blockSize - 25;
 
       this.dragging = true
     }
@@ -273,8 +273,8 @@ class playGame extends Phaser.Scene {
           if (this.notSelected(col, row) && this.areNext(col, row)) {
             //console.log('row' + row + ' col' + col);
             this.board[row][col].image.setAlpha(1)
-            this.board[row][col].image.displayWidth = this.blockSize - 15;
-            this.board[row][col].image.displayHeight = this.blockSize - 15;
+            this.board[row][col].image.displayWidth = this.blockSize - 25;
+            this.board[row][col].image.displayHeight = this.blockSize - 25;
             this.guessWord += this.board[row][col].letter
             if (this.board[row][col].bonus > this.currentBonus) {
               this.currentBonus = this.board[row][col].bonus
