@@ -3,7 +3,7 @@ class preloadGame extends Phaser.Scene {
     super("PreloadGame");
   }
   preload() {
-/*
+
 
     var progressBar = this.add.graphics();
     var progressBox = this.add.graphics();
@@ -69,7 +69,7 @@ class preloadGame extends Phaser.Scene {
     for (var i = 0; i < 125; i++) {
       this.load.image("particle", "assets/sprites/particle.png");
     }
-*/
+
     this.load.image("particle", "assets/sprites/particle.png");
 
 
