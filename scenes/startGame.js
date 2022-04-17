@@ -3,8 +3,7 @@ class startGame extends Phaser.Scene {
     super("startGame");
   }
   preload() {
-    //this.load.bitmapFont('atari', 'assets/fonts/atari-smooth.png', 'assets/fonts/atari-smooth.xml');
-    // this.load.bitmapFont('atari', 'assets/fonts/Lato_0.png', 'assets/fonts/lato.xml');
+
 
   }
   create() {
