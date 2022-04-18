@@ -66,10 +66,10 @@ class preloadGame extends Phaser.Scene {
     });
 
 
-    for (var i = 0; i < 125; i++) {
+    /* for (var i = 0; i < 125; i++) {
       this.load.image("particle", "assets/sprites/particle.png");
     }
-
+ */
     this.load.image("particle", "assets/sprites/particle.png");
 
 
@@ -80,10 +80,7 @@ class preloadGame extends Phaser.Scene {
       frameHeight: 96
     });
 
-    this.load.spritesheet("letters_", "assets/sprites/letter-alt.png", {
-      frameWidth: 80,
-      frameHeight: 80
-    });
+
     this.load.spritesheet("letters", "assets/sprites/letter-alt-no_border.png", {
       frameWidth: 80,
       frameHeight: 80

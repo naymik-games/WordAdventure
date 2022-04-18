@@ -14,7 +14,7 @@ class startGame extends Phaser.Scene {
       gameSettings = defaultValues;
     }
 
-    this.cameras.main.setBackgroundColor(0x000000);
+    //this.cameras.main.setBackgroundColor(0x000000);
     var back = this.add.image(0, 0, 'back').setOrigin(0)
     var title = this.add.bitmapText(150, 100, 'lato', 'WORD', 100).setOrigin(0, .5).setTint(0xfa983c);
     var title2 = this.add.bitmapText(150, 175, 'lato', 'ADVENTURE', 100).setOrigin(0, .5).setTint(0xFFFFFF);
