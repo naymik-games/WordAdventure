@@ -16,7 +16,7 @@ class endGame extends Phaser.Scene {
 		this.cameras.main.fadeIn(1000, 0, 0, 0)
 		this.cameras.main.setBackgroundColor(0xf7eac6);
 		var back = this.add.image(0, 0, 'back').setOrigin(0)
-
+		gameSettings.onGroup = onGroup
 		if (gameMode == 0) { //classic
 			var mode = 'Classic'
 			var highScore = gameSettings.classicHigh

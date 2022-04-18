@@ -89,20 +89,20 @@ class selectGame extends Phaser.Scene {
       console.log(gameSettings.results[levels[onLevel].key].best)
       if (levels[tempLevel].level < gameSettings.highestSolved) {
         var status = this.add.bitmapText(game.config.width / 2, levelTitle.y + 100, 'lato', gameSettings.results[levels[tempLevel].key].stars, 70).setTint(0xffffff).setOrigin(.5).setInteractive();
-
+        levelTitle.on('pointerup', this.selectLevel.bind(this, levelTitle));
       } else if (levels[tempLevel].level == gameSettings.highestSolved) {
         var status = this.add.bitmapText(game.config.width / 2, levelTitle.y + 100, 'lato', gameSettings.results[levels[tempLevel].key].stars, 70).setTint(0xffffff).setOrigin(.5).setInteractive();
-
+        levelTitle.on('pointerup', this.selectLevel.bind(this, levelTitle));
       } else if (levels[tempLevel].level == gameSettings.highestSolved + 1) {
         var status = this.add.bitmapText(game.config.width / 2, levelTitle.y + 100, 'lato', 'Not Solved', 70).setTint(0xffffff).setOrigin(.5).setInteractive();
-
+        levelTitle.on('pointerup', this.selectLevel.bind(this, levelTitle));
       } else {
         var status = this.add.bitmapText(game.config.width / 2, levelTitle.y + 100, 'lato', 'Locked', 70).setTint(0xffffff).setOrigin(.5).setInteractive();
         var lock = this.add.image(levelTitle.x - 45, levelTitle.y, 'lock').setScale(1.5).setDepth(5).setAlpha(1)
         groupBox.add(lock)
         groupBox.bringToTop(lock)
       }
-      levelTitle.on('pointerup', this.selectLevel.bind(this, levelTitle));
+
       levelTitle.level = tempLevel
 
       groupBox.add(levelTitle);
@@ -175,6 +175,7 @@ class selectGame extends Phaser.Scene {
     if (this.swipe) { return }
     console.log(t.level)
     onLevel = t.level
+    onGroup = this.startGroup
     this.scene.start('playGame')
   }
 
