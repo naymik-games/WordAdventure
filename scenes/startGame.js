@@ -8,9 +8,9 @@ class startGame extends Phaser.Scene {
   }
   create() {
 
-    gameSettings = JSON.parse(localStorage.getItem('waSave'));
+    gameSettings = JSON.parse(localStorage.getItem('waSavePWA'));
     if (gameSettings === null || gameSettings.length <= 0) {
-      localStorage.setItem('waSave', JSON.stringify(defaultValues));
+      localStorage.setItem('waSavePWA', JSON.stringify(defaultValues));
       gameSettings = defaultValues;
     }
 

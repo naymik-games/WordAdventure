@@ -129,7 +129,7 @@ class endGame extends Phaser.Scene {
 		this.scene.restart('UI');
 	}
 	saveSettings() {
-		localStorage.setItem('waSave', JSON.stringify(gameSettings))
+		localStorage.setItem('waSavePWA', JSON.stringify(gameSettings))
 	}
 
 }

@@ -180,7 +180,7 @@ class selectGame extends Phaser.Scene {
   }
 
   saveSettings() {
-    localStorage.setItem('waSave', JSON.stringify(gameSettings))
+    localStorage.setItem('waSavePWA', JSON.stringify(gameSettings))
   }
 
 }

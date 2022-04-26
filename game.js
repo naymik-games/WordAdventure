@@ -321,7 +321,7 @@ class playGame extends Phaser.Scene {
       if (wordType == 0) { //too short
         this.wordValueText.setText('0')
         this.guessWordText.setText('')
-        if(gameMode == 2){
+        if (gameMode == 2) {
           //console.log(this.selected)
           //this.swapTiles(this.selected)
         }
@@ -504,7 +504,7 @@ class playGame extends Phaser.Scene {
       duration: 250
     })
   }
-  swapTiles(tiles){
+  swapTiles(tiles) {
     var row1 = tiles[0].row
     var col1 = tiles[0].col
     var row2 = tiles[1].row
@@ -830,6 +830,6 @@ class playGame extends Phaser.Scene {
 
   }
   saveSettings() {
-    localStorage.setItem('waSave', JSON.stringify(gameSettings))
+    localStorage.setItem('waSavePWA', JSON.stringify(gameSettings))
   }
 }
