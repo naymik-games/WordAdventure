@@ -34,6 +34,10 @@ levels = [
   { level: 18, key: 'starpeople', theme: 'More People', orient: 2, size: { cols: 8, rows: 10 }, overlap: true, words: ["Quigon", "darthmaul", "emperor", "bobafett", "ray", "finn", "bensolo", "monmotha", "phasma", "tarkin"] },
   { level: 19, key: 'starall', theme: 'Stuff', orient: 2, size: { cols: 8, rows: 10 }, overlap: true, words: ["lightsaber", "blaster", "droids", "carbonite", "force", "jedi", "plans", "shields", "hyperspace"] },
 
-  { level: 20, key: 'lotrp', theme: 'Poeple', orient: 2, size: { cols: 8, rows: 10 }, overlap: true, words: ["speeder", "tie", "xwing", "falcon", "destroyer", "transport"] }
+  { level: 20, key: 'lotrh', theme: 'Hobbits', orient: 2, size: { cols: 8, rows: 10 }, overlap: true, words: ["bilbo", "frodo", "peregrin", "merry", "samwise", "lobelia", "proudfoot", "rose", "gaffer"] },
+  { level: 21, key: 'lotrg', theme: 'Good', orient: 2, size: { cols: 8, rows: 10 }, overlap: true, words: ["gandolf", "treebeard", "galadriell", "elrond", "elfstone", "gimli", "bombadil", "smeagol"] },
+  { level: 22, key: 'lotrb', theme: 'Bad', orient: 2, size: { cols: 8, rows: 10 }, overlap: true, words: ["sauron", "saruman", "wormtounge", "witchking", "barlog", "orc", "gollum", "ted", "gorbag"] },
+  { level: 23, key: 'lotrp', theme: 'Places', orient: 2, size: { cols: 8, rows: 11 }, overlap: true, words: ["shire", "rivendell", "lorien", "mordor", "rohan", "minastirith", "moria", "helmsdeep", "isengard"] },
+  { level: 24, key: 'lotrs', theme: 'Stuff', orient: 2, size: { cols: 8, rows: 10 }, overlap: true, words: ["aragorn", "andural", "butterbur", "weed", "ring", "havens", "elves", "bagend", "sharky", "partytree", "potato"] },
 ];
 
