@@ -18,7 +18,11 @@ class selectGame extends Phaser.Scene {
 
     this.showGroup(this.startGroup, 'left');
     //this.return = this.add.image(game.config.width / 2, 1550, 'icons', 5).setScale(1.5).setInteractive().setTint(0xc76210);
-
+    var homeText = this.add.bitmapText(125, 1550, 'lato', '[home]', 60).setOrigin(.5).setTint(0xFFFFFF).setInteractive();
+    homeText.on('pointerdown', function () {
+      this.scene.start('startGame')
+      //this.play()
+    }, this)
     //this.backText = this.add.bitmapText(game.config.width / 2, 1500, 'atari', '< back', 60).setOrigin(.5, .5).setTint(0xd8a603).setInteractive();
     //this.return.level = -2;
 

@@ -94,9 +94,17 @@ class endGame extends Phaser.Scene {
 		this.saveSettings()
 		this.newBest = false;
 
+		var playText = this.add.bitmapText(450, 1375, 'lato', '[play]', 80).setOrigin(.5).setTint(0xFFFFFF).setInteractive();
+		playText.on('pointerdown', function () {
+			//this.scene.start('startGame')
+			this.play()
+		}, this)
+
+
 		var homeText = this.add.bitmapText(450, 1475, 'lato', '[home]', 80).setOrigin(.5).setTint(0xFFFFFF).setInteractive();
 		homeText.on('pointerdown', function () {
 			this.scene.start('startGame')
+
 		}, this)
 		//this.previewBox.add(star); 
 
@@ -117,10 +125,11 @@ class endGame extends Phaser.Scene {
 		this.scene.stop('playGame');
 		this.scene.stop('endGame');
 		this.scene.stop('UI');
-		if (gameMode == 'challenge') {
+		if (gameMode == 1) {
 			this.scene.start('selectGame')
 		} else {
-			this.scene.start('startGame')
+			//this.scene.start('startGame')
+			this.scene.start('playGame')
 		}
 	}
 	cancel() {
